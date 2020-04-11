@@ -186,10 +186,7 @@ function openIt() {
       width: 1050, 
       height: 595, 
       frame: process.platform != 'darwin', 
-      transparent: false,
-      webPreferences: {
-          nodeIntegration: true
-        }
+      transparent: false
     }
   );
 
@@ -221,12 +218,12 @@ function openIt() {
     win2.loadURL('file://' + __dirname + '/' + html);
     mainWindow = win2;
 
-    // const { BrowserWindow } = require('electron')
-    // let win = new BrowserWindow({
-    // webPreferences: {
-    //     nodeIntegration: true
-    //   }
-    // })
+    const { BrowserWindow } = require('electron')
+    let win = new BrowserWindow({
+    webPreferences: {
+        nodeIntegration: true
+      }
+    })
 
     // remove all events then close it
     removeEvents(everWindow);

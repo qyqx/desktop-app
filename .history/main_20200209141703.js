@@ -26,7 +26,12 @@ const gotTheLock = app.requestSingleInstanceLock()
 if (!gotTheLock) {
     app.quit()
 } else {
-
+  const { BrowserWindow } = require('electron')
+  let win = new BrowserWindow({
+  webPreferences: {
+      nodeIntegration: true
+    }
+  })
   // Someone tried to run a second instance, we should focus our window.
   if (mainWindow) {
     mainWindow.show();
@@ -186,10 +191,7 @@ function openIt() {
       width: 1050, 
       height: 595, 
       frame: process.platform != 'darwin', 
-      transparent: false,
-      webPreferences: {
-          nodeIntegration: true
-        }
+      transparent: false
     }
   );
 
@@ -220,13 +222,6 @@ function openIt() {
     var win2 = new BrowserWindow(arg);
     win2.loadURL('file://' + __dirname + '/' + html);
     mainWindow = win2;
-
-    // const { BrowserWindow } = require('electron')
-    // let win = new BrowserWindow({
-    // webPreferences: {
-    //     nodeIntegration: true
-    //   }
-    // })
 
     // remove all events then close it
     removeEvents(everWindow);
